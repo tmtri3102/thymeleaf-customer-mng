@@ -1,8 +1,9 @@
 package com.example.customermanagementthymeleaf.controller;
 
 import com.example.customermanagementthymeleaf.model.Customer;
-import com.example.customermanagementthymeleaf.service.CustomerService;
+import com.example.customermanagementthymeleaf.service.HibernateCustomerService;
 import com.example.customermanagementthymeleaf.service.ICustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
-    private final ICustomerService customerService = new CustomerService();
+    @Autowired
+    private ICustomerService customerService;
 
     @GetMapping("")
     public String index(Model model) {
@@ -36,7 +38,7 @@ public class CustomerController {
 
     @PostMapping("/save")
     public String save(Customer customer) {
-        customer.setId((int) (Math.random() * 10000));
+
         customerService.save(customer);
 
         return "redirect:/customers/create";

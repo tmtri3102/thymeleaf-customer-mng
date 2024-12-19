@@ -1,6 +1,13 @@
 package com.example.customermanagementthymeleaf.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "customer")
 public class Customer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    Id = primary key, GeneratedValue = auto increment
     private int id;
     private String name;
     private String email;
